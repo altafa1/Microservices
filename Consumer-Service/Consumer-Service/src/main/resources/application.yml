@@ -1,0 +1,60 @@
+#spring:
+#  application:
+#   name: Consumer-Service
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:9090/
+
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+
+
+#spring:
+#  application:
+#    name: consumer
+#  config:
+#    import: optional:configserver:http://localhost:1212
+
+
+spring:
+  application:
+    name: Consumer-Service
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090/
+server:
+  port: 9990
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitBreakers:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      providerbreaker:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 4
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        waitDurationInOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 6
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 3
+        slidingWindowType: COUNT_BASED
+
+

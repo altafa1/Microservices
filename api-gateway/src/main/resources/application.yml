@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: PROVIDER-SERVICE
+          uri: lb://PROVIDER-SERVICE
+          predicates:
+            - Path=/provider/**
+        - id: CONSUMER-SERVICE
+          uri: lb://CONSUMER-SERVICE
+          predicates:
+            - Path=/consumer/**
+
+server:
+  port: 3333

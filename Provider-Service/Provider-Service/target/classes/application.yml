@@ -1,0 +1,23 @@
+#spring:
+#  application:
+#   name: PROVIDER-SERVICE
+#
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:9090/
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+
+server:
+  port: 1000
+
+spring:
+  application:
+    name: provider
+  config:
+    import: optional:configserver:http://localhost:1212
